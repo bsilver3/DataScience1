@@ -10,10 +10,6 @@ body {
     width: 100vw;
 
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-}
-
-.tile {
-    outline: 1px solid white;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
 }
