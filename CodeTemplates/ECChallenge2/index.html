@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Free Willy!</title>
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Lato';
+        background-color: #16252f;
+        color: white
+    }
+
+    p {
+        font-family: 'Lato';
+        text-shadow: 1px 1px 1px black;
+    }
+
+    h1 {
+        font-family: 'Merriweather';
+        text-shadow: 1px 1px 1px black;
+        font-size: 48px;
+        line-height: 75px;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 10%;
+    }
+
+    .header {
+        background-color: transparent;
+        padding: 0px;
+        text-align: center;
+        font-size: 35px;
+        height: 85vh;
+    }
+
+    .footer {
+        background-color: #16252f;
+        padding: 10px;
+        text-align: center;
+    }
+
+    video#bgVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        min-width: 100%;
+        height: auto;
+        min-height: 100%;
+        z-index: -100;
+        background-size: cover;
+    }
+
+    @media (max-width: 1050px) {
+        .column.left, .column.right {
+            width: 100%;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 5%;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="center">
+        <video id="bgVideo" controls preload="true" autoplay loop muted>
+            <source src="willy.mp4" type="video/mp4" />
+        </video>
+        <h1>Free Willy and Flipper <br>
+            by the Numbers</h1>
+        <p style="color: rgb(231, 217, 138); font-size: 24px; line-height: 35px;">
+            The past, present, and future of captive whales and dolphins <br>
+            according to data and pop culture.
+        </p>
+    </div>
+</div>
+
+<div class="footer">
+    <p style="color: white; font-size: 16px;">
+        <i>
+            <br>
+            "I've got to look out for Willy and I've got to do what's best for him."
+        </i>
+    </p>
+</div>
+
+</body>
+</html>
