@@ -1,0 +1,44 @@
+body {
+    background-color: rgb(10,10,10);
+    display: grid;
+    height: 100vh;
+    margin: 0px;
+    overflow: hidden;
+    place-items: center;
+}
+
+h1 {
+    color: white;
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(2em, 2vw, 4em);
+    font-weight: 400;
+    margin: 0px;
+    padding: 20px;
+}
+
+@keyframes background-pan {
+    from{
+        background-position: 0% center;
+    }
+
+    to{
+        background-position: -200% center;
+    }
+}
+
+h1 > .gradient {
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(
+        to right,
+        rgb(116, 15, 239),
+        rgb(187, 15, 239),
+        rgb(239, 15, 183),
+        rgb(116, 15, 239)
+        );
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    -webkit-animation: background-pan 3s linear infinite;
+}
