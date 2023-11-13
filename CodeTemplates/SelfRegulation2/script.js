@@ -1,55 +1,21 @@
-const wrapper = document.getElementById("tiles");
+let index = 0,
+    interval = 1000;
 
-let columns = Math.floor(document.body.clientWidth / 50);
-    rows = Math.floor(document.body.clientHeight / 50);
+const rand = (min,max) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
 
-const colors = [
-    "rgb(229,57,53)",
-    "rgb(253,216,53)",
-    "rgb(244,81,30)",
-    "rgb(76,175,80)",
-    "rgb(33,150,243)",
-    "rgb(156,39,176)"
-];
-
-let count = -1;
-
-const handleOnClick = index => {
-    count = count + 1;
-    anime({
-        targets: ".tile",
-        backgroundColor: colors[count % (colors.length - 1)],
-        delay: anime.stagger(50, {
-            grid: [columns, rows],
-            from: index
-        })
-    })
+const animate = star => {
+    star.style.setProperty("--star-left", `${rand(-10, 100)}%`);
+    star.style.setProperty("--star-top", `${rand(-40, 80)}%`);
+    star.style.animation = "none";
+    star.offsetHeight;
+    star.style.animation = "";
 }
 
-const createTile = index => {
-    const tile = document.createElement("div");
+for(const star of document.getElementsByClassName("star")) {
+    setTimeout(() => {
+        animate(star);
 
-    tile.classList.add("tile");
-
-    tile.onclick = e => handleOnClick(index);
-
-    return tile;
+        setInterval(() => animate(star), 1000);
+    }, index++ * (interval/3))
 }
-
-const createTiles = quantity => {
-    Array.from(Array(quantity)).map((tile, index) => {
-        wrapper.appendChild(createTile(index));
-    })
-}
-
-const createGrid = () => {
-    wrapper.innerHTML = "";
-    columns = Math.floor(document.body.clientWidth / 50);
-    rows = Math.floor(document.body.clientHeight / 50);
-    wrapper.style.setProperty("--columns", columns);
-    wrapper.style.setProperty("--row", rows)
-    createTiles(columns * rows);
-}
-
-createGrid();
-window.onresize = () => createGrid();

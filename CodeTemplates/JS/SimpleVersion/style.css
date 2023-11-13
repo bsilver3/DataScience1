@@ -1,0 +1,82 @@
+body {
+    overflow: hidden;
+    justify-items: center;
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+}
+
+div {
+    margin-bottom: 50px;
+}
+
+@keyframes slideRight { /* Moves the bar from 0% position to 100% position. */
+    from{
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+    }
+    to{
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+    }
+}
+
+@keyframes slideLeft { /* Moves the bar from 0% position to -100% position. */
+    from{
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+}
+}
+
+.bars span {
+    display: inline-block;
+    width: 100%;
+    min-height: 50vh; /* 50% of the screen, which is just 100 divided by the amount of bars */
+    padding: 0px;
+    margin: 0px;
+}
+
+.bars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    z-index: 2; /* Sets the bars in front of the text, making it not have an effect on the content below it :) */
+}
+
+#red {
+    background: rgb(234,62,56);
+    width: 100%;
+}
+#purple {
+    background: rgb(27,40,106);
+    width: 100%;
+}
+
+.right {
+    animation: 1s ease-out 0.5s 1 slideRight forwards; /* Applies the animation with a 1s timer, and 0.5s delay. Forwards makes it so it doesn't reset. */
+    -webkit-animation: 1s ease-out 0.5s 1 slideRight forwards; /* Applies the animation with a 1s timer, and 0.5s delay. Forwards makes it so it doesn't reset. */
+}
+
+.left {
+    animation: 1s ease-out 0.5s 1 slideLeft forwards; /* Applies the animation with a 1s timer, and 0.5s delay. Forwards makes it so it doesn't reset. */
+    -webkit-animation: 1s ease-out 0.5s 1 slideLeft forwards; /* Applies the animation with a 1s timer, and 0.5s delay. Forwards makes it so it doesn't reset. */
+}
