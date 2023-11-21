@@ -1,0 +1,131 @@
+:root {
+  --purple: rgb(123, 31, 162);
+  --violet: rgb(183, 58, 162);
+  --pink: rgb(244, 106, 204);
+
+  --blue: rgb(45, 85, 195);
+  --ocean: rgb(45, 103, 195);
+  --ice: rgb(45, 165, 195);
+}
+
+body {
+  background-color: rgb(20, 20, 20);
+  display: grid;
+  height: 100vh;
+  margin: 0px;
+  justify-items: center;
+  line-height: 25px;
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: clamp(1.2em, 1.2vw, 4em);
+  padding: 20px;
+}
+
+h1 {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: clamp(2em, 2vw, 4em);
+  font-weight: 600;
+  margin: 0px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+h2 {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: clamp(1.6em, 1.6vw, 4em);
+  font-weight: 400;
+  margin: 0px;
+  padding: 20px;
+  line-height: 40px;
+  text-align: center;
+}
+
+a {
+  animation: background-pan 3s linear infinite;
+  background: linear-gradient(
+    to right,
+    var(--blue),
+    var(--ocean),
+    var(--ice),
+    var(--blue)
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+table {
+  text-align: center;
+  line-height: 30px;
+}
+
+#img-container {
+  text-align: center;
+}
+
+img {
+  margin: auto;
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: -200% center;
+  }
+}
+
+h1 > .magic {
+  display: inline-block;
+  position: relative;
+}
+
+th {
+  padding: 15px;
+}
+
+td {
+  padding: 10px;
+}
+
+.magic-text {
+  font-weight: 600;
+  animation: background-pan 3s linear infinite;
+  background: linear-gradient(
+    to right,
+    var(--blue),
+    var(--ocean),
+    var(--ice),
+    var(--blue)
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+#main {
+  width: 66%;
+}
+
+@media (max-width: 950px) {
+  #main {
+    width: 90%;
+  }
+
+  body {
+    font-size: clamp(1.4em, 1.4vw, 4em);
+    padding: 0px;
+  }
+
+  img {
+    margin: 0px;
+    object-fit: contain;
+  }
+}
