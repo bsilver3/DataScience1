@@ -161,7 +161,7 @@
             .style("background-color", "rgb(25,25,25)")
             .style("width", "175px")
             .style("border", "solid")
-            .style("z-index", "2")
+            .style("z-index", "50000")
             .style("border-width", "1px")
             .style("border-radius", "5px")
             .style("padding", "10px")
@@ -169,6 +169,9 @@
           var mouseover = function(d) {
             tooltip
               .style("opacity", 1)
+              // .style("position", "absolute")
+              .style("left", (d3.mouse(this)[0]+90) + "px")
+              .style("top", (d3.mouse(this)[1]) + "px")
           }
 
           var mousemove = function(d) {
@@ -187,7 +190,7 @@
 
           scatter
             .selectAll("circle")
-            .data(data.filter(function(d,i){return i<50}))
+            .data(data.filter(function(d,i){return i<20000}))
             .enter()
             .append("circle")
               .attr("cx", function (d) { return x(d.Velocity); } )
