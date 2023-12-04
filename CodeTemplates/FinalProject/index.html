@@ -9,6 +9,28 @@
   <script src="https://d3js.org/d3.v4.js"></script>
 </head>
 
+<style>
+
+  .line {
+    fill: none;
+    stroke: rgb(45, 165, 195);
+    stroke-width: 2px;
+  }
+
+  .axisWhite line{
+    stroke: rgb(240,240,240);
+  }
+
+  .axisWhite path{
+    stroke: rgb(240,240,240);
+  }
+
+  .axisWhite text{
+    fill: rgb(240,240,240);
+  }
+
+  </style>
+
 <body>
     <div id="main">
 
@@ -73,21 +95,15 @@
 
     <div class="content">
       <h1>My <span class="magic-text">Visualizations</span></h1>
-      <p id="img-container">
-          <img src="image2.png">
-          <img src="image3.png">
-      </p>
 
-      <div id="scatterplot"></div>
+      <div id="scatterplot" style="text-align: center;"></div>
       <script>
 
-        // set the dimensions and margins of the graph
-        var margin = {top: 10, right: 30, bottom: 30, left: 60},
-            width = 460 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+        var margin = {top: 10, right: 30, bottom: 30, left: 30},
+          width = 460 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
 
-        // append the svg object to the body of the page
-        var svg = d3.select("#scatterplot")
+        var SVG = d3.select("#scatterplot")
           .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -95,36 +111,123 @@
             .attr("transform",
                   "translate(" + margin.left + "," + margin.top + ")");
 
-        //Read the data
         d3.csv("https://raw.githubusercontent.com/bsilver3/DataScience1/main/Projects/FinalProject/SaccadesDataset.csv", function(data) {
 
-          // Add X axis
+          SVG.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", width)
+            .attr("y", height - 6)
+            .text("Velocity");
+
+          SVG.append("text")
+            .attr("text-anchor", "end")
+            .attr("y", 6)
+            .attr("dy", ".75em")
+            .attr("transform", "rotate(-90)")
+            .text("Amplitude");
+
+          d3.selectAll("text").attr("fill", "white");
+
           var x = d3.scaleLinear()
             .domain([0, 3500])
             .range([ 0, width ]);
-          svg.append("g")
+          var xAxis = SVG.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x))
-            .style("stroke","white");
+            .attr("class", "axisWhite")
+            .call(d3.axisBottom(x));
 
-          // Add Y axis
           var y = d3.scaleLinear()
             .domain([0, 50])
             .range([ height, 0]);
-          svg.append("g")
-            .call(d3.axisLeft(y))
-            .style("stroke","white");
+          var yAxis = SVG.append("g")
+            .attr("class", "axisWhite")
+            .call(d3.axisLeft(y));
 
-          // Add dots
-          svg.append('g')
-            .selectAll("dot")
-            .data(data)
+          var clip = SVG.append("defs").append("SVG:clipPath")
+            .attr("id", "clip")
+            .append("SVG:rect")
+            .attr("width", width )
+            .attr("height", height )
+            .attr("x", 0)
+            .attr("y", 0);
+
+          var scatter = SVG.append('g')
+            .attr("clip-path", "url(#clip)")
+
+          var tooltip = d3.select("#scatterplot")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "rgb(25,25,25)")
+            .style("width", "175px")
+            .style("border", "solid")
+            .style("z-index", "2")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+
+          var mouseover = function(d) {
+            tooltip
+              .style("opacity", 1)
+          }
+
+          var mousemove = function(d) {
+            tooltip
+              .html("Velocity: " + d.Velocity + "<br>Amplitude: " + d.Amplitude)
+              .style("left", (d3.mouse(this)[0]+90) + "px")
+              .style("top", (d3.mouse(this)[1]) + "px")
+          }
+
+          var mouseleave = function(d) {
+            tooltip
+              .transition()
+              .duration(200)
+              .style("opacity", 0)
+          }
+
+          scatter
+            .selectAll("circle")
+            .data(data.filter(function(d,i){return i<50}))
             .enter()
             .append("circle")
               .attr("cx", function (d) { return x(d.Velocity); } )
               .attr("cy", function (d) { return y(d.Amplitude); } )
-              .attr("r", 1.5)
+              .attr("r", 5)
               .style("fill", "rgb(45, 165, 195)")
+              .style("opacity", 0.5)
+            .on("mouseover", mouseover )
+            .on("mousemove", mousemove )
+            .on("mouseleave", mouseleave )
+
+          var zoom = d3.zoom()
+            .scaleExtent([.5, 20])  // This control how much you can unzoom (x0.5) and zoom (x20)
+            .extent([[0, 0], [width, height]])
+            .on("zoom", updateChart);
+
+          SVG.append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+            .call(zoom);
+
+          function updateChart() {
+
+            // recover the new scale
+            var newX = d3.event.transform.rescaleX(x);
+            var newY = d3.event.transform.rescaleY(y);
+
+            // update axes with these new boundaries
+            xAxis.call(d3.axisBottom(newX))
+            yAxis.call(d3.axisLeft(newY))
+
+              // update circle position
+            scatter
+              .selectAll("circle")
+              .attr('cx', function(d) {return newX(d.Velocity)})
+              .attr('cy', function(d) {return newY(d.Amplitude)});
+          }
         })
         </script>
     </div>
