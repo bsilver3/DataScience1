@@ -35,6 +35,35 @@
     <div id="main">
 
     <div class="question">
+
+      <p>
+        Recall that incredibly focused moment, during the final moments of a project, test, or deadline. 
+        The analog clock just out of your vision silently ticks away, reminding you to focus, 
+        although you don’t know how much time remains. You are “locked in”. Nothing can interrupt your intense focus. 
+        However, without the audible rhythm of the clock ticking, you quickly shift your attention to the clock to check how much time is left. 
+        Wait- what!? It looked like the second hand stopped for a bit!?
+      </p>
+
+      <p>
+        That brief moment when time seems to stretch, and you're left wondering if reality just hit a pause button – 
+        <span class="magic-text">that's chronostasis at play. </span>
+        It's like a magic trick your brain pulls when you're laser-focused on something, 
+        and then, surprise, a new thing pops up.
+      </p>
+
+      <p>
+        Imagine your eyes doing a quick dance between two points – that's called a <span class="glow-text">saccadic eye movement. </span>
+        When locking on the new surprise object after that quick saccadic eye dance, 
+        your brain subtly distorts your perception, which tricks you into thinking the surprise lasted longer than it actually did. 
+        Think about how someone might get dizzy after spinning around.
+      </p>
+
+      <p>
+        Now, here's the intriguing part that keeps me hooked: how often does this time-bending magic unfold in our daily lives, 
+        and what role does the speed of our saccadic eye dance play in the enchantment of chronostasis? 
+        Join me on this journey as we unravel the secrets behind this captivating illusion and discover the hidden rhythms of time in the everyday.
+      </p>
+
       <h1>My <span class="magic-text">Question</span></h1>
       <h2>
           <span class="magic-text">Chronostasis</span> - What percentage of people have experienced it, and how does it scale with the speed of an eye movement?
@@ -165,11 +194,11 @@
             .style("border-width", "1px")
             .style("border-radius", "5px")
             .style("padding", "10px")
+            .style("position", "absolute")
 
           var mouseover = function(d) {
             tooltip
               .style("opacity", 1)
-              // .style("position", "absolute")
               .style("left", (d3.mouse(this)[0]+90) + "px")
               .style("top", (d3.mouse(this)[1]) + "px")
           }
@@ -189,13 +218,14 @@
           }
 
           scatter
-            .selectAll("circle")
+            .selectAll("dot")
             .data(data.filter(function(d,i){return i<20000}))
             .enter()
             .append("circle")
               .attr("cx", function (d) { return x(d.Velocity); } )
               .attr("cy", function (d) { return y(d.Amplitude); } )
               .attr("r", 5)
+              .attr("z-index", 5)
               .style("fill", "rgb(45, 165, 195)")
               .style("opacity", 0.5)
             .on("mouseover", mouseover )
@@ -211,7 +241,7 @@
             .attr("width", width)
             .attr("height", height)
             .style("fill", "none")
-            .style("pointer-events", "all")
+            // .style("pointer-events", "all")
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
             .call(zoom);
 

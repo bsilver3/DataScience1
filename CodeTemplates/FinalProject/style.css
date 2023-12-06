@@ -194,6 +194,11 @@ h3 > .magic-text {
   font-weight: 800px;
 }
 
+.glow-text {
+  color: var(--ice);
+  text-shadow: 0px 0px 5px var(--blue), 0px 0px 7px var(--ocean), 0px 0px 10px var(--ice);
+}
+
 h4 {
   font-weight: 400;
 }
