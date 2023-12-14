@@ -199,6 +199,11 @@ h3 > .magic-text {
   text-shadow: 0px 0px 5px var(--blue), 0px 0px 7px var(--ocean), 0px 0px 10px var(--ice);
 }
 
+b {
+  color: var(--ice);
+  text-shadow: 0px 0px 5px var(--blue), 0px 0px 7px var(--ocean), 0px 0px 10px var(--ice);
+}
+
 h4 {
   font-weight: 400;
 }
