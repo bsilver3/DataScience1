@@ -20,25 +20,25 @@ var SVG = d3.select("#scatterplot")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("https://raw.githubusercontent.com/bsilver3/DataScience1/main/Projects/FinalProject/SaccadesDataset.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/bsilver3/DataScience1/main/Projects/FinalProject/SaccadesDataset-PostAnalysis.csv", function(data) {
 
 SVG.append("text")
   .attr("text-anchor", "end")
   .attr("x", width)
   .attr("y", height - 6)
-  .text("Velocity");
+  .text("Amplitude");
 
 SVG.append("text")
   .attr("text-anchor", "end")
   .attr("y", 6)
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
-  .text("Amplitude");
+  .text("Velocity");
 
 d3.selectAll("text").attr("fill", "white");
 
 var x = d3.scaleLinear()
-  .domain([0, 3500])
+  .domain([0, 50])
   .range([ 0, width ]);
 var xAxis = SVG.append("g")
   .attr("transform", "translate(0," + height + ")")
@@ -46,7 +46,7 @@ var xAxis = SVG.append("g")
   .call(d3.axisBottom(x));
 
 var y = d3.scaleLinear()
-  .domain([0, 50])
+  .domain([0, 3500])
   .range([ height, 0]);
 var yAxis = SVG.append("g")
   .attr("class", "axisWhite")
@@ -85,7 +85,7 @@ var mouseover = function(d) {
 
 var mousemove = function(d) {
   tooltip
-    .html("Velocity: " + d.Velocity + "<br>Amplitude: " + d.Amplitude)
+    .html("Amplitude: " + d.Amplitude + "<br>Velocity: " + d.Velocity)
     .style("left", (d3.mouse(this)[0]+90) + "px")
     .style("top", (d3.mouse(this)[1]) + "px")
 }
@@ -99,11 +99,11 @@ var mouseleave = function(d) {
 
 scatter
   .selectAll("dot")
-  .data(data.filter(function(d,i){return i<20000}))
+  .data(data.filter(function(d,i){return i<35000}))
   .enter()
   .append("circle")
-    .attr("cx", function (d) { return x(d.Velocity); } )
-    .attr("cy", function (d) { return y(d.Amplitude); } )
+    .attr("cx", function (d) { return x(d.Amplitude); } )
+    .attr("cy", function (d) { return y(d.Velocity); } )
     .attr("r", 5)
     .attr("z-index", 5)
     .style("fill", "rgb(45, 165, 195)")

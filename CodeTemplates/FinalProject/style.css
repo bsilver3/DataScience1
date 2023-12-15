@@ -13,11 +13,15 @@ body {
   height: 100vh;
   margin: 0px;
   justify-items: center;
-  line-height: 25px;
+  line-height: 35px;
   color: rgb(240, 240, 240);
   font-family: "Rubik", sans-serif;
   font-size: clamp(1.2em, 1.2vw, 4em);
-  padding: 20px;
+}
+
+p {
+  margin-block-start: 100px;
+  margin-block-end: 100px;
 }
 
 div > .content {
@@ -32,12 +36,15 @@ div > .content {
 h1 {
   color: rgb(240, 240, 240);
   font-family: "Rubik", sans-serif;
-  font-size: clamp(2em, 2vw, 4em);
+  font-size: 5lvw;
   font-weight: 600;
-  margin: 0px;
+  margin-left: 50px;
+  margin-right: 50px;
   padding: 20px;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 25lvh;
+  margin-bottom: 40lvh;
+  line-height: 20lvh;
 }
 
 h2 {
@@ -210,7 +217,6 @@ h4 {
 
 #main {
   width: 66%;
-  position: absolute;
 }
 
 @media (max-width: 950px) {
