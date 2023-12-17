@@ -215,8 +215,22 @@ h4 {
   font-weight: 400;
 }
 
+.main-content {
+  width: 100%;
+  display: flex;
+}
+
 #main {
-  width: 66%;
+  width: 45%;
+  padding-right: 4%;
+  padding-left: 1%;
+  justify-self: right;
+}
+
+#visualizations {
+  width: 50%;
+  padding: 0px;
+  justify-self: left;
 }
 
 @media (max-width: 950px) {
