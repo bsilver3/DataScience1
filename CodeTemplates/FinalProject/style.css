@@ -17,15 +17,22 @@ body {
   color: rgb(240, 240, 240);
   font-family: "Rubik", sans-serif;
   font-size: clamp(1.2em, 1.2vw, 4em);
+
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -ms-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  overflow-x: hidden
 }
 
 p {
-  margin-block-start: 100px;
-  margin-block-end: 100px;
+  margin-block-start: 350px;
+  margin-block-end: 350px;
 }
 
 div > .content {
-  margin-bottom: 250px;
+  margin-bottom: 1000px;
 }
 
 .question {
@@ -215,23 +222,72 @@ h4 {
   font-weight: 400;
 }
 
-.main-content {
-  width: 100%;
-  display: flex;
-}
-
 #main {
   width: 45%;
   padding-right: 4%;
   padding-left: 1%;
-  justify-self: right;
 }
 
-#visualizations {
+#visualizations{
   width: 50%;
-  padding: 0px;
-  justify-self: left;
+  position: sticky;
+  top: 0px;
+  height: 100lvh;
 }
+
+.main-content{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.intro-content{
+  width: 50%;
+  padding: 0% 25%;
+}
+
+.shadow {
+  --direction: 0deg;
+  --shadow-size: 300px;
+  bottom: 0px;
+  pointer-events: none;
+  position: sticky;
+  height: var(--shadow-size);
+  margin-top: calc(-1 * var(--shadow-size));
+  background: linear-gradient(var(--direction),var(--bg-color) 0%,transparent 100%);
+  width: 100%;
+  z-index: 4;
+}
+
+.shadow-top {
+  --direction: 180deg;
+  --shadow-size: 300px;
+  top: 0px;
+  pointer-events: none;
+  position: sticky;
+  height: var(--shadow-size);
+  margin-top: calc(-1 * var(--shadow-size));
+  background: linear-gradient(var(--direction),var(--bg-color) 0%,transparent 100%);
+  width: 100%;
+  z-index: 4;
+}
+
+.visualization-container{
+  --overflow-space: 200px;
+    position: sticky;
+    top: 25%;
+    user-select: none;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    opacity: 1;
+    animation: jBsbPq 4s 400ms forwards;
+}
+
 
 @media (max-width: 950px) {
   #cards {
