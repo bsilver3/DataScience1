@@ -122,8 +122,9 @@ div > .card-body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  max-width: 916px;
+  max-width: 100%;
   width: calc(100% - 20px);
+  justify-content: center;
 }
 
 #cards:hover > .card::after {
@@ -243,9 +244,14 @@ h4 {
   flex-wrap: wrap;
 }
 
-.intro-content{
+.para-text{
   width: 50%;
   padding: 0% 25%;
+}
+
+.concluded-numbers{
+  width: 90%;
+  margin: auto;
 }
 
 .shadow {
@@ -276,16 +282,13 @@ h4 {
 
 .visualization-container{
   --overflow-space: 200px;
-    position: sticky;
-    top: 25%;
     user-select: none;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    opacity: 1;
-    animation: jBsbPq 4s 400ms forwards;
+    padding-top: 25%;
 }
 
 
@@ -329,4 +332,36 @@ h4 {
     font-weight: 400;
     margin-top: 15px;
   }
+
+  .para-text{
+    width: 90%;
+    margin: auto;
+    padding: 0px;
+  }
+
+  .concluded-numbers{
+    width: 90%;
+    margin: auto;
+  }
+
+  #visualizations{
+    width: inherit;
+    position: inherit;
+    top: 0px;
+    height: inherit;
+  }
+
+  #graph-scatterplot {
+		opacity: 1;
+		-webkit-transform: scale(0.9);
+			 -moz-transform: scale(0.9);
+				-ms-transform: scale(0.9);
+				 -o-transform: scale(0.9);
+						transform: scale(0.9);
+		-webkit-transition: all 0.5s ease-in-out;
+			 -moz-transition: all 0.5s ease-in-out;
+				-ms-transition: all 0.5s ease-in-out;
+				 -o-transition: all 0.5s ease-in-out;
+						transition: all 0.5s ease-in-out;
+	}
 }
